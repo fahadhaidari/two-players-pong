@@ -7,7 +7,7 @@ qKit.init({
 
 const PAD_WIDTH = 10;
 const PAD_HEIGHT = 60;
-const QUAD_SIZE = 15;
+const pong_SIZE = 15;
 let leftPadScore = 0;
 let rightPadScore = 0;
 
@@ -46,11 +46,11 @@ const roof = qKit.draw.quad({
 });
 
 // pong object
-const quad = qKit.draw.quad({
+const pong = qKit.draw.quad({
   x: qKit.screen.width / 2,
   y: qKit.screen.height / 2,
-  width: QUAD_SIZE,
-  height: QUAD_SIZE,
+  width: pong_SIZE,
+  height: pong_SIZE,
   color: 'teal',
   extension: {
     dir: {
@@ -84,32 +84,32 @@ qKit.input.keyUp(() => {
 });
 
 qKit.update(() => {
-  quad.x += quad.extension.vel.x * quad.extension.dir.x;
-  quad.y += quad.extension.vel.y * quad.extension.dir.y;
+  pong.x += pong.extension.vel.x * pong.extension.dir.x;
+  pong.y += pong.extension.vel.y * pong.extension.dir.y;
   leftPad.y += leftPad.extension.vel.y;
   rightPad.y += rightPad.extension.vel.y;
 
   const isCollideWithPad =
-    qKit.collision.test(quad, leftPad) ||
-    qKit.collision.test(quad, rightPad);
+    qKit.collision.test(pong, leftPad) ||
+    qKit.collision.test(pong, rightPad);
 
   if (isCollideWithPad)
-    quad.extension.vel.x *= -1;
+    pong.extension.vel.x *= -1;
 
-  if (quad.x < leftPad.getLeft().x) {
+  if (pong.x < leftPad.getLeft().x) {
     rightPadScore ++;
     scoresText.text = `${leftPadScore}:${rightPadScore}`;
-    resetQuad();
+    resetpong();
   } else
-  if (quad.x > rightPad.getLeft().x) {
+  if (pong.x > rightPad.getLeft().x) {
     leftPadScore ++;
     scoresText.text = `${leftPadScore}:${rightPadScore}`;
-    resetQuad();
+    resetpong();
   }
 
   bouncePad(leftPad);
   bouncePad(rightPad);
-  bouncePad(quad);
+  bouncePad(pong);
 });
 
 // bounce back the passed pad once it hits top/bottom borders
@@ -122,10 +122,10 @@ const bouncePad = function(entity) {
     entity.extension.vel.y *= -1;
 };
 
-const resetQuad = function() {
-  quad.center();
-  quad.extension.dir.x = [-1, 1][qKit.util.randomInt(0, 2)];
-  quad.extension.dir.y = [-1, 1][qKit.util.randomInt(0, 2)];
-  quad.extension.vel.x = qKit.util.randomInt(3, 5);
-  quad.extension.vel.y = qKit.util.randomInt(3, 5);
+const resetpong = function() {
+  pong.center();
+  pong.extension.dir.x = [-1, 1][qKit.util.randomInt(0, 2)];
+  pong.extension.dir.y = [-1, 1][qKit.util.randomInt(0, 2)];
+  pong.extension.vel.x = qKit.util.randomInt(3, 5);
+  pong.extension.vel.y = qKit.util.randomInt(3, 5);
 };
