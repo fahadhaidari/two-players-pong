@@ -104,16 +104,16 @@ qKit.update(() => {
   if (pong.x > rightPad.getLeft().x) {
     leftPadScore ++;
     scoresText.text = `${leftPadScore}:${rightPadScore}`;
-    resetpong();
+    resetPong();
   }
 
-  bouncePad(leftPad);
-  bouncePad(rightPad);
-  bouncePad(pong);
+  bounce(leftPad);
+  bounce(rightPad);
+  bounce(pong);
 });
 
 // bounce back the passed pad once it hits top/bottom borders
-const bouncePad = function(entity) {
+const bounce = function(entity) {
   const isCollideBorders =
     qKit.collision.test(entity, ground) ||
     qKit.collision.test(entity, roof);
