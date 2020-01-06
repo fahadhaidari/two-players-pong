@@ -66,7 +66,7 @@ const pong = qKit.draw.quad({
 
 const scoresText = qKit.draw.text({
   text: '0:0',
-  x: qKit.screen.width / 2 - 25,
+  x: qKit.screen.width / 2 - 30,
   y: 30,
   color: '#555',
   size: 30,
