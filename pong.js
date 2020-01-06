@@ -99,7 +99,7 @@ qKit.update(() => {
   if (pong.x < leftPad.getLeft().x) {
     rightPadScore ++;
     scoresText.text = `${leftPadScore}:${rightPadScore}`;
-    resetpong();
+    resetPong();
   } else
   if (pong.x > rightPad.getLeft().x) {
     leftPadScore ++;
@@ -122,7 +122,7 @@ const bouncePad = function(entity) {
     entity.extension.vel.y *= -1;
 };
 
-const resetpong = function() {
+const resetPong = function() {
   pong.center();
   pong.extension.dir.x = [-1, 1][qKit.util.randomInt(0, 2)];
   pong.extension.dir.y = [-1, 1][qKit.util.randomInt(0, 2)];
